@@ -33,5 +33,13 @@ namespace Tetris
                 p.Move(dir);
             }
         }
+
+        public void Hide()
+        {
+            foreach(Point p in points)
+            {
+                p.Hide();
+            }
+        }
     }
 }
