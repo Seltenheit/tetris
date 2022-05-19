@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Tetris
 {
-    class Figure
+    abstract class Figure
     {
         protected Point[] points = new Point[4];
+
+        public abstract void Rotate();
+       
 
         //public Square(int x, int y, char sym)
         //{

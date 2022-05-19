@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections", "..\Collectio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "..\Enums\Enums.csproj", "{845B91D0-3937-4AC0-AEF9-A30120AB8DB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Randomizer", "..\Randomizer\Randomizer.csproj", "{2DA51B58-A0BF-4BB2-80A7-45EE267174B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{845B91D0-3937-4AC0-AEF9-A30120AB8DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{845B91D0-3937-4AC0-AEF9-A30120AB8DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{845B91D0-3937-4AC0-AEF9-A30120AB8DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA51B58-A0BF-4BB2-80A7-45EE267174B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA51B58-A0BF-4BB2-80A7-45EE267174B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA51B58-A0BF-4BB2-80A7-45EE267174B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA51B58-A0BF-4BB2-80A7-45EE267174B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
