@@ -8,18 +8,10 @@ namespace Tetris
 {
     abstract class Figure
     {
-        protected Point[] points = new Point[4];
+        const int LENGTH = 4;
+        protected Point[] points = new Point[LENGTH];
 
-        public abstract void Rotate();
-       
-
-        //public Square(int x, int y, char sym)
-        //{
-        //    points[0] = new Point(x, y, sym);
-        //    points[1] = new Point(x + 1, y, sym);
-        //    points[2] = new Point(x, y + 1, sym);
-        //    points[3] = new Point(x + 1, y + 1, sym);
-        //}
+        public abstract void Rotate(Point[] pList);
 
         public void Draw()
         {
@@ -28,21 +20,78 @@ namespace Tetris
                 p.Draw();
             }
         }
-
-        public void Move(Direction dir)
+        internal void TryMove(Direction dir)
         {
-            foreach(Point p in points)
+            Hide();
+
+            var clone = Clone();
+            Move(clone, dir);
+
+            if (VerifyPosition(clone))
+                points = clone;
+
+            Draw();
+        }
+
+        private bool VerifyPosition(Point[] pList)
+        {
+            foreach(var p in pList)
+            {
+                if (p.x < 0 || p.y < 0 || p.x >= 39 || p.y >= 29)
+                    return false;
+            }
+
+            return true;
+        }
+
+        private Point[] Clone()
+        {
+            var newPoints = new Point[LENGTH];
+            for (int i = 0; i < LENGTH; i++)
+            {
+                newPoints[i] = new Point(points[i]);
+            }
+            return newPoints;
+        }
+
+        public void Move(Point[] pList, Direction dir)
+        {
+            foreach(var p in pList)
             {
                 p.Move(dir);
             }
         }
 
+        internal void TryRotate()
+        {
+            Hide();
+
+            var clone = Clone();
+            Rotate(clone);
+
+            if (VerifyPosition(clone))
+                points = clone;
+
+            Draw();
+        }
+
+        //public void Move(Direction dir)
+        //{
+        //    Hide();
+        //    foreach (Point p in points)
+        //    {
+        //        p.Move(dir);
+        //    }
+        //    Draw();
+        //}
+
         public void Hide()
         {
-            foreach(Point p in points)
+            foreach (Point p in points)
             {
                 p.Hide();
             }
         }
+
     }
 }
