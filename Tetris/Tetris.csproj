@@ -46,6 +46,7 @@
     <Compile Include="C:\Users\koriv\Documents\GitHub\tetris\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
+    <Compile Include="Field.cs" />
     <Compile Include="FigureGenerator.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Figure.cs" />
