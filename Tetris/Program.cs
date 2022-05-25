@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Tetris
 {
@@ -13,24 +14,42 @@ namespace Tetris
             Console.SetWindowSize(40, 30);
             Console.SetBufferSize(40, 30);
 
-            int x1 = 2;
-            int y1 = 3;
-            char c1 = '*';
-            Drow(x1, y1, c1);
 
-            int x2 = 1;
-            int y2 = 3;
-            char c2 = '#';
+            FigureGenerator generator = new FigureGenerator(20, 0, '*');
+            Figure currentFigure = generator.GenerateNewFigure();
 
-            Drow(x2, y2, c2);
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    /*ConsoleKeyInfo*/
+                    var key = Console.ReadKey();
+                    HandleKey(currentFigure, key);
 
-            Console.ReadKey();
+                }
+            }
         }
 
-        static void Drow(int x, int y, char c)
+        private static void HandleKey(Figure currentFigure, ConsoleKeyInfo key)
         {
-            Console.SetCursorPosition(x, y);
-            Console.Write(c);
+            switch (key.Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    currentFigure.TryMove(Direction.LEFT);
+                    break;
+                case ConsoleKey.RightArrow:
+                    currentFigure.TryMove(Direction.RIGHT);
+                    break;
+                case ConsoleKey.DownArrow:
+                    currentFigure.TryMove(Direction.DOWN);
+                    break;
+                case ConsoleKey.Spacebar:
+                    currentFigure.TryRotate();
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }
