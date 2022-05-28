@@ -10,15 +10,7 @@ namespace Tetris
     {
         public int X { get; set; }
         public int Y { get; set; }
-
         public char C { get; set; }
-
-        public void Draw()
-        {
-            Console.SetCursorPosition(X, Y);
-            Console.Write(C);
-            Console.SetCursorPosition(0, 0);
-        }
 
         public Point(Point p)
         {
@@ -56,5 +48,13 @@ namespace Tetris
             Console.SetCursorPosition(X, Y);
             Console.Write(" ");
         }
+
+        public void Draw()
+        {
+            Console.SetCursorPosition(X, Y);
+            Console.Write(C);
+            Console.SetCursorPosition(0, 0);
+        }
+
     }
 }

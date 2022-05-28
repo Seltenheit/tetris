@@ -8,14 +8,13 @@ namespace Tetris
 {
     class Stick : Figure
     {
-        //Point[] points = new Point[4];
 
         public Stick(int x, int y, char sym)
         {
-            points[0] = new Point(x, y, sym);
-            points[1] = new Point(x, y + 1, sym);
-            points[2] = new Point(x, y + 2, sym);
-            points[3] = new Point(x, y + 3, sym);
+            Points[0] = new Point(x, y, sym);
+            Points[1] = new Point(x, y + 1, sym);
+            Points[2] = new Point(x, y + 2, sym);
+            Points[3] = new Point(x, y + 3, sym);
             Draw();
         }
 
@@ -48,13 +47,5 @@ namespace Tetris
                 pList[i].X = pList[0].X + i;
             }
         }
-
-        //public void Draw()
-        //{
-        //    foreach (Point p in points)
-        //    {
-        //        p.Draw();
-        //    }
-        //}
     }
 }
