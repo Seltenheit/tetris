@@ -10,6 +10,10 @@ namespace Tetris
 {
     internal class Program
     {
+        const int TIMER_INTERVAL = 500;
+        static System.Timers.Timer timer;
+
+        static Figure currentFigure;
         static FigureGenerator generator;
         static void Main(string[] args)
         {
@@ -18,6 +22,7 @@ namespace Tetris
 
             generator = new FigureGenerator(Field.Width / 2, 0, Drawer.DEFAULT_SYMBOL);
             Figure currentFigure = generator.GenerateNewFigure();
+            SetTimer();
 
             while (true)
             {
@@ -30,6 +35,20 @@ namespace Tetris
 
                 }
             }
+        }
+
+        private static void SetTimer()
+        {
+            timer = new System.Timers.Timer(TIMER_INTERVAL);
+            timer.Elapsed += OnTimedEvent;
+            timer.AutoReset = true;
+            timer.Enabled = true;
+        }
+
+        private static void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            var result = currentFigure.TryMove(Direction.DOWN);
+            ProcessResult(result, ref currentFigure);
         }
 
         private static bool ProcessResult(Result result, ref Figure currentFigure)

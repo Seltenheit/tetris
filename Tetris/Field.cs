@@ -47,7 +47,7 @@ namespace Tetris
             _heap = new bool[Height][];
             for (int i = 0; i < Height; i++)
             {
-                _heap[i] = new bool[Width];
+                _heap[i] = new bool[Width - 1];
             }
         }
 
@@ -62,12 +62,12 @@ namespace Tetris
             {
                 int counter = 0;
 
-                for (int i = 0; i < Width; i++)
+                for (int i = 0; i < Width - 1; i++)
                 {
                     if(_heap[j][i])
                         counter++;
                 }
-                if(counter == Width)
+                if(counter == Width - 1)
                 {
                     DeleteLine(j);
                     Redraw();
@@ -79,7 +79,7 @@ namespace Tetris
         {
             for (int j = 0; j < Height; j++)
             {
-                for (int i = 0; i < Width; i++)
+                for (int i = 0; i < Width - 1; i++)
                 {
                     if (_heap[j][i])
                         Drawer.DrawPoint(i, j);
@@ -93,7 +93,7 @@ namespace Tetris
         {
             for (int j = line; j >= 0; j--)
             {
-                for (int i = 0; i < Width; i++)
+                for (int i = 0; i < Width - 1; i++)
                 {
                     if (j == 0)
                         _heap[j][i] = false;
