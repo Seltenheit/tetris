@@ -93,5 +93,10 @@ namespace Tetris
                 p.Draw();
             }
         }
+
+        internal bool IsOnTop()
+        {
+            return Points[0].Y == 0;
+        }
     }
 }

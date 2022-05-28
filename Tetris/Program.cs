@@ -12,6 +12,7 @@ namespace Tetris
     {
         const int TIMER_INTERVAL = 500;
         static System.Timers.Timer timer;
+        static private Object _lockObject = new object();
 
         static Figure currentFigure;
         static FigureGenerator generator;
@@ -21,7 +22,7 @@ namespace Tetris
             Console.SetBufferSize(Field.Width, Field.Height);
 
             generator = new FigureGenerator(Field.Width / 2, 0, Drawer.DEFAULT_SYMBOL);
-            Figure currentFigure = generator.GenerateNewFigure();
+            currentFigure = generator.GenerateNewFigure();
             SetTimer();
 
             while (true)
@@ -30,19 +31,22 @@ namespace Tetris
                 {
                     /*ConsoleKeyInfo*/
                     var key = Console.ReadKey();
+                    Monitor.Enter(_lockObject);
                     var result = HandleKey(currentFigure, key.Key);
                     ProcessResult(result, ref currentFigure);
-
+                    Monitor.Exit(_lockObject);
                 }
             }
         }
 
         private static void SetTimer()
         {
+            Monitor.Enter(_lockObject);
             timer = new System.Timers.Timer(TIMER_INTERVAL);
             timer.Elapsed += OnTimedEvent;
             timer.AutoReset = true;
             timer.Enabled = true;
+            Monitor.Exit(_lockObject);
         }
 
         private static void OnTimedEvent(object sender, ElapsedEventArgs e)
@@ -57,11 +61,32 @@ namespace Tetris
             {
                 Field.AddFigure(currentFigure);
                 Field.TryDeleteLines();
-                currentFigure = generator.GenerateNewFigure();
-                return true;
+
+                if (currentFigure.IsOnTop())
+                {
+                    
+                    WriteGameOver();
+                    timer.Elapsed -= OnTimedEvent;
+                    return true;
+                }
+                else
+                {
+                    currentFigure = generator.GenerateNewFigure();
+                    return false;
+                }
             }
             else
                 return false;
+        }
+
+        private static void WriteGameOver()
+        {
+            Console.SetCursorPosition(Field.Width / 2 - 8, Field.Height / 2 - 1);
+            Console.WriteLine("G A M E   O V E R");
+            Console.SetCursorPosition(Field.Width / 2 - 8, Field.Height / 2 + 1);
+            Console.WriteLine("press any button");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
 
         private static Result HandleKey(Figure f, ConsoleKey key)
