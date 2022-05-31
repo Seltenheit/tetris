@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Drawer.cs" />
+    <Compile Include="ConsoleDrawer.cs" />
+    <Compile Include="DrawerProvider.cs" />
+    <Compile Include="IDrawer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FigureGenerator.cs" />
